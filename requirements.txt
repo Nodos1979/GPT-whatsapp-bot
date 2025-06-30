@@ -1,6 +1,9 @@
-flask
-twilio
-openai>=1.0.0
-apscheduler
+fastapi
+uvicorn
 python-dotenv
-gunicorn
+twilio
+google-api-python-client
+google-auth
+google-auth-oauthlib
+python-multipart
+pytz
