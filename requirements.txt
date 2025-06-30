@@ -1,6 +1,6 @@
 flask
 twilio
-openai
+openai>=1.0.0
 apscheduler
 python-dotenv
 gunicorn

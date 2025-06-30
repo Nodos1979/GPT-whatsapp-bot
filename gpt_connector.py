@@ -2,12 +2,12 @@ import openai
 import os
 import json
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 GPT_ID = os.getenv("GPT_ID")
 
 def send_to_gpt(user_input):
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model=GPT_ID,
             messages=[
                 {"role": "user", "content": user_input}
@@ -40,9 +40,9 @@ def send_to_gpt(user_input):
             function_call={"name": "create_google_task"}
         )
 
-        fn_call = response.choices[0].message.get("function_call")
-        if fn_call and fn_call["name"] == "create_google_task":
-            args = json.loads(fn_call["arguments"])
+        fn_call = response.choices[0].message.function_call
+        if fn_call and fn_call.name == "create_google_task":
+            args = json.loads(fn_call.arguments)
             return args
         return None
     except Exception as e:
